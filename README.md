@@ -4,7 +4,7 @@
 [![Security Paradigm](https://img.shields.io/badge/Paradigm-Never%20Trust%2C%20Always%20Verify-FF5733?style=for-the-badge)](https://www.nist.gov/publications/zero-trust-architecture)
 [![Architecture Standard](https://img.shields.io/badge/Standard-NIST%20SP%20800--207-0052CC?style=for-the-badge)]()
 
-A production-grade implementation of a Zero Trust Architecture (ZTA) based on the core paradigm **"Never Trust, Always Verify."** This deployment completely eliminates the legacy notion of a trusted internal network by hiding critical enterprise infrastructure behind an Identity-Aware Proxy (IAP) backed by modern cryptographic authentication layers.
+A production-grade implementation of a Zero Trust Architecture (ZTA) based on the core paradigm **Never Trust Always Verify ** This deployment completely eliminates the legacy notion of a trusted internal network by hiding critical enterprise infrastructure behind an Identity-Aware Proxy (IAP) backed by modern cryptographic authentication layers.
 
 ---
 
