@@ -1,0 +1,38 @@
+# Pomerium Zero Trust Configuration Policy
+address: ":443"
+
+# إعدادات مزود الهوية (Google OAuth مثال)
+idp:
+  provider: "google"
+  client_id: "YOUR_GOOGLE_CLIENT_ID"
+  client_secret: "YOUR_GOOGLE_CLIENT_SECRET"
+  url: "https://accounts.google.com"
+
+# إعدادات شهادات SSL (ضرورية للإنتاج)
+certs:
+  - cert: "/pomerium/cert.pem"
+    key: "/pomerium/key.pem"
+
+# سياسات التوجيه والأمان
+routes:
+  - from: "https://secure.yourdomain.com"
+    to: "http://internal-secure-service:5678"
+    policy:
+      - allow:
+          and:
+            - domain:
+                is: "yourdomain.com"
+            - email:
+                ends_with: "@yourdomain.com"
+            - group:
+                has: "admin"  # إضافة تحقق من مجموعة المستخدمين
+
+# إعدادات إضافية للأمان
+settings:
+  timeout: 30s
+  log_level: "debug"
+  tracing: false
+
+# تعطيل الوصول غير الآمن
+disable_forward_proxy: true
+disable_redirects: true

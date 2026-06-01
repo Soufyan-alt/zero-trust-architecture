@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  pomerium:
+    image: pomerium/pomerium:v0.18.0
+    container_name: zero-trust-proxy
+    volumes:
+      - ./config.yaml:/pomerium/config.yaml:ro
+    ports:
+      - "443:443/tcp"
+    restart: unless-stopped
+    networks:
+      - pomerium-net
+    environment:
+      - POMERIUM_CONFIG_FILE=/pomerium/config.yaml
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:443/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  internal-secure-service:
+    image: hashicorp/http-echo:v0.2.3
+    container_name: internal-target
+    args:
+      - "-text=Welcome to the Secure Enterprise Core. Identity Verified."
+    networks:
+      - pomerium-net
+    expose:
+      - "5678"
+
+networks:
+  pomerium-net:
+    driver: bridge
